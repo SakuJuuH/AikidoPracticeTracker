@@ -17,7 +17,7 @@ public class AikidoPracticeTracker {
 			return;
 		}
 		this.trainingSessions.add(session);
-		
+
 		System.out.println("Training session added: " + session.getDate() + ", Duration: " + session.getDuration());
 
 	}
@@ -31,15 +31,15 @@ public class AikidoPracticeTracker {
 		return false;
 	}
 
-	public void checkGraduationEligibility() {
+	public boolean checkGraduationEligibility() {
 		if (trainingSessions.size() >= 100) {
-			isEligibleForGraduation = true;
-			System.out.println("You are eligible for graduation!");
+			return true;
 		} else {
-			System.out.println("You need more training sessions to be eligible for graduation.");
+			return trainingSessions.getFirst().getDate()
+			                       .isBefore(trainingSessions.getLast().getDate().minusMonths(6));
 		}
 	}
-	
+
 	public double getTotalTrainingTime() {
 		double totalTime = 0;
 		for (TrainingSession session : trainingSessions) {
@@ -47,4 +47,9 @@ public class AikidoPracticeTracker {
 		}
 		return totalTime;
 	}
+
+	public void setEligibilityForGraduation() {
+		this.isEligibleForGraduation = checkGraduationEligibility();
+	}
+
 }
