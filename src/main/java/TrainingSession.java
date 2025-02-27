@@ -1,15 +1,18 @@
+import java.time.LocalDate;
+import java.util.Date;
+
 public class TrainingSession {
 
-	private String date;
+	private LocalDate date;
 	private double duration;
 
 
-	public TrainingSession(String date, double duration) {
+	public TrainingSession(LocalDate date, double duration) {
 		this.date = date;
 		this.duration = duration;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
@@ -17,7 +20,7 @@ public class TrainingSession {
 		return duration;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
