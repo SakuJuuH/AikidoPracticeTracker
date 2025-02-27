@@ -34,9 +34,15 @@ public class AikidoPracticeTracker {
 	public boolean checkGraduationEligibility() {
 		if (trainingSessions.size() >= 100) {
 			return true;
+		} else if (trainingSessions.size() < 2) {
+			return false;  // Need at least 2 sessions to compare dates
 		} else {
 			return trainingSessions.getFirst().getDate()
-			                       .isBefore(trainingSessions.getLast().getDate().minusMonths(6));
+			                       .plusMonths(6)
+			                       .isBefore(trainingSessions.getLast().getDate())
+			       || trainingSessions.getFirst().getDate()
+			                          .plusMonths(6)
+			                          .isEqual(trainingSessions.getLast().getDate());
 		}
 	}
 
