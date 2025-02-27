@@ -52,7 +52,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>AikidoTracker</mainClass>
+                            <mainClass>Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -88,6 +88,7 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
+                    <argLine>--enable-preview</argLine>
                 </configuration>
             </plugin>
         </plugins>
