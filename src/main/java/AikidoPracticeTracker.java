@@ -1,13 +1,14 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class AikidoPracticeTracker {
 
-	List<TrainingSession> trainingSessions;
+	Set<TrainingSession> trainingSessions;
 	private boolean isEligibleForGraduation;
 
 	public AikidoPracticeTracker() {
-		trainingSessions = new ArrayList<>();
+		trainingSessions = new TreeSet<>();
 		isEligibleForGraduation = false;
 	}
 
@@ -18,7 +19,8 @@ public class AikidoPracticeTracker {
 		}
 		this.trainingSessions.add(session);
 
-		System.out.println("Training session added: " + session.getDate() + ", Duration: " + session.getDuration());
+		System.out.println(
+				"Session added successfully. Date: " + session.getDate() + ", Duration: " + session.getDuration());
 
 	}
 
@@ -32,17 +34,15 @@ public class AikidoPracticeTracker {
 	}
 
 	public boolean checkGraduationEligibility() {
-		if (trainingSessions.size() >= 100) {
+		if (trainingSessions.size() > 100) {
 			return true;
 		} else if (trainingSessions.size() < 2) {
-			return false;  // Need at least 2 sessions to compare dates
+			return false;
 		} else {
-			return trainingSessions.getFirst().getDate()
-			                       .plusMonths(6)
-			                       .isBefore(trainingSessions.getLast().getDate())
-			       || trainingSessions.getFirst().getDate()
-			                          .plusMonths(6)
-			                          .isEqual(trainingSessions.getLast().getDate());
+			TrainingSession firstSession = Collections.min(trainingSessions);
+			TrainingSession lastSession = Collections.max(trainingSessions);
+			return lastSession.getDate().isAfter(firstSession.getDate().plusMonths(6)) ||
+			       lastSession.getDate().isEqual(firstSession.getDate().plusMonths(6));
 		}
 	}
 
