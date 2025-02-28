@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class TrainingSession {
+public class TrainingSession implements Comparable<TrainingSession> {
 
 	private LocalDate date;
 	private double duration;
@@ -28,5 +28,10 @@ public class TrainingSession {
 			throw new IllegalArgumentException("Duration cannot be negative");
 		}
 		this.duration = duration;
+	}
+
+	@Override
+	public int compareTo(TrainingSession o) {
+		return this.date.compareTo(o.date);
 	}
 }
